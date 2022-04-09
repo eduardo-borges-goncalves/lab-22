@@ -4,28 +4,20 @@ import create from "zustand"
 import { ProductProps } from "../components/Product";
 
 type Data = {
-  dataArray: ProductProps[],
-  setDataArray: ()=> void
+  products: ProductProps[],
+  setProducts: ()=> void
 }
 
 export const useProduct = create <Data> ( set => ({
-  dataArray: [],
-  setDataArray: async () => {
+  products: [],
+  setProducts: async () => {
     const response = await axios.get("http://localhost:3001/products")
-    set(() =>({dataArray:response.data}))
+    set(() =>({products:response.data}))
   }
 }))
 
-type CartElement = {
-  quantity: number | 0,
-  price: number, 
-  name: string, 
-  id: number,
-  picture: string,
-}
-
 type Cart = {
-  cart: CartElement[],
+  cart: ProductProps[],
   setCart: (id:number,name:string, picture:string, quantity:number, price:number, drop:boolean, index: number) => void, 
 }
 
@@ -41,9 +33,7 @@ export const useCart = create <Cart> ( set =>({
     set( ({cart})=>({ cart:[...cart,{id,name,picture,quantity,price}] }) )
   }
 }))
-function Dispatch<T>(): () => void {
-  throw new Error("Function not implemented.");
-}
+
 
 
 
