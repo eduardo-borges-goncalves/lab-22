@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCart, useProduct } from "../../state/globalState";
 import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";
 
@@ -12,16 +13,34 @@ export type ProductProps = {
 
 const Product = ({ id, name, price, picture, quantity }: ProductProps) => {
   const [ quantityBuy, setQuantityBuy ] = useState(1)
-
+  
+  const {cart, setCart } = useCart()
+  
   let priceTotal = price * quantityBuy;
   let formattedPrice = priceTotal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
-  function changeQuantityBuy (typeAction:string) {
-    if (typeAction === "sub" && quantityBuy > 0 )
-      setQuantityBuy(quantityBuy - 1) 
-    else if (typeAction === "sum")
-      setQuantityBuy(quantityBuy + 1)
+  function setCartGlobal (quantity:number, type: string) {
+    let indexIsOnCart = -1
+    cart.map( (car) => {
+      if (car.name === name ) {
+        indexIsOnCart = cart.indexOf(car)
+      }
+    })
+    
+    quantity >= 0 &&
+     setCart(id, name, picture, quantity, price, true, indexIsOnCart);
   }
+
+  function changeQuantityBuy (typeAction:string, quantity: number) {
+    if (typeAction === "sub" && quantityBuy > 0 ){
+      setQuantityBuy(quantityBuy - 1) 
+    }
+    if (typeAction === "sum"){
+      setQuantityBuy(quantityBuy + 1)
+    }
+    setCartGlobal(quantity, typeAction)
+  }
+
 
   return (
   <Wrapper>
@@ -37,7 +56,8 @@ const Product = ({ id, name, price, picture, quantity }: ProductProps) => {
         <Incrementor 
           id={id} 
           quantity={quantityBuy}
-          changeQuantityBuy={changeQuantityBuy} />
+          changeQuantityBuy={changeQuantityBuy}
+        />
       </WrapperIncrementor>
     </Info>
   </Wrapper>
