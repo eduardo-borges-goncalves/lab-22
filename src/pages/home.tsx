@@ -9,30 +9,28 @@ const Home = () => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ loading, setLoading ] = useState(true)
 
-  const {dataArray, setDataArray} = useProduct()
+  const {products, setProducts} = useProduct()
 
-  useEffect(() => { setDataArray() }, [])
-  useEffect(() => { setLoading(false) }, [dataArray])
+  useEffect(() => { setProducts() }, [])
+  useEffect(() => { setLoading(false) }, [products])
   return (
     loading ?
     <div> </div> :
     <>
       <Header setIsOpen={setIsOpen} />
-      {
-        dataArray.map((product) => {
-          return (
-          <Container>
-            <Product {...product} />
-            <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
-          </Container> )
-        })
-      }
+      <Container>
+        {
+          products.map((product) => {
+            return (
+              <Product {...product} key={product.id}/> 
+            )
+          })
+        }
+        <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
+      </Container> )
+     
     </>
   );
 };
 
 export default Home;
-function useProducts() {
-  throw new Error("Function not implemented.");
-} // o que é iso e porque está aqui ?
-
