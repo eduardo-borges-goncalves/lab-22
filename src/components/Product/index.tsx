@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCart, useProduct, useQuantity } from "../../state/globalState";
+import { useCart, useQuantity } from "../../state/globalState";
 import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";
 
@@ -21,16 +21,20 @@ const Product = ({ id, name, price, picture }: ProductProps) => {
     let quantityToPrice = quantity.filter(item=> item.id === id)
     if (quantityToPrice.length > 0) {
       let priceTotal = price * quantityToPrice[0].quantityPerProduct
-      setTotalFormatted(priceTotal.toLocaleString('pt-br', {style:"currency", currency:"BRL"}))
+      setTotalFormatted(priceTotal.toLocaleString('pt-br',
+        {style:"currency", currency:"BRL"}))
     }
   }, [quantity])
 
-  let formattedPrice = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+  let formattedPrice = price.toLocaleString('pt-br',{style: 'currency',
+  currency: 'BRL'});
 
   function setProductInCart (quantity:number) {
-    quantity >= 0 &&
-     setCart(id, name, picture, quantity, price);
+    quantity >= 0 && setCart(id, name, picture, quantity, price);
   }
+
+  // como setar o carrrinho pela ordem da entrada? insiro mais uma variável 
+  // chamada data? 
 
   return (
   <Wrapper>
@@ -48,8 +52,8 @@ const Product = ({ id, name, price, picture }: ProductProps) => {
       <WrapperIncrementor>
         <Incrementor 
           id={id} 
-          setProductInCart={setProductInCart}
-          />
+          setProductInCart={setProductInCart} 
+        />
       </WrapperIncrementor>
     </Info>
   </Wrapper>

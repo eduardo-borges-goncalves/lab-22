@@ -1,7 +1,7 @@
 import { Plus as PlusIcon } from "@styled-icons/boxicons-regular/Plus";
 import { Subtract as SubtractIcon } from "@styled-icons/remix-fill/Subtract";
 import { useEffect, useState } from "react";
-import { useCart, useQuantity } from "../../state/globalState";
+import { useQuantity } from "../../state/globalState";
 
 import { Wrapper, IconWrapper, Quantity } from "./styles";
 

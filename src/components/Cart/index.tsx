@@ -13,14 +13,6 @@ export type MenuPaymentProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-/**
- * Adicionar itens ao carrinho, design ao seu critério mas deve conter:
- * - Nome do produto
- * - Imagem
- * - Preço
- * - Incrementador
- */
-
 const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
   const [totalPrice, setTotalPrice] = useState(0)
 
@@ -28,13 +20,11 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
 
   useEffect(() => {
     let cumulatedPrice = 0
-    cart.map(car => {
-      cumulatedPrice = car.price * car.quantity + cumulatedPrice
-      setTotalPrice(cumulatedPrice)
-    })
+    cart.map(car => setTotalPrice(cumulatedPrice += car.price * car.quantity))
   }, [cart])
 
-  let formattedPrice = totalPrice.toLocaleString("pt-br", { style: 'currency', currency: "BRL" })
+  let formattedPrice = totalPrice.toLocaleString("pt-br", { style: 'currency',
+  currency: "BRL" })
 
   return (
     <Wrapper isOpen={isOpen}>
@@ -46,15 +36,11 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
       </Header>
       { cart.length > 0 ?
         <>
-        { cart.map(product => {  
-            if (product.quantity !== 0) {
-              return (
-                <Subtotal>
-                  <Product {...product} />
-                </Subtotal> 
-              )
-            } 
-          })
+        { cart.map(product =>
+            <Subtotal>
+              <Product {...product} key={product.id} />
+            </Subtotal> 
+          )
         }
         <Subtotal>
           <Typography level={5} size="large" fontWeight={600}>

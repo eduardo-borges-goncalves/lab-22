@@ -15,20 +15,16 @@ const Home = () => {
   useEffect(() => { setLoading(false) }, [products])
   return (
     loading ?
-    <div> </div> :
+    <div> </div> 
+    :
     <>
-      <Header setIsOpen={setIsOpen} />
-      <Container>
-        {
-          products.map((product) => {
-            return (
-              <Product {...product} key={product.id}/> 
-            )
-          })
-        }
-        <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
-      </Container> )
-     
+    <Header setIsOpen={setIsOpen} />
+    <Container>
+      {
+        products.map((product) => <Product {...product} key={product.id}/>)
+      }
+      <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
+    </Container> ) 
     </>
   );
 };

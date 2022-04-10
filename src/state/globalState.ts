@@ -1,5 +1,4 @@
 import axios from "axios";
-import React, { SetStateAction } from "react";
 import create from "zustand"
 import { ProductProps } from "../components/Product";
 
@@ -25,7 +24,7 @@ export const useCart = create <Cart> ( set =>({
   cart: [],
   setCart: (id:number,name:string,picture:string,quantity:number,price:number) => {
     set( ({cart}) => ({ cart: cart.filter(item => item.id !== id) }) )
-    set( ({cart}) => ({ cart:[...cart,{id,name,picture,quantity,price}] }) )
+    quantity > 0 && set( ({cart}) => ({ cart:[...cart,{id,name,picture,quantity,price}] }) )
   }
 }))
 

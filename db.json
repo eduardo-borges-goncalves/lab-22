@@ -5,53 +5,53 @@
       "name": "Iphone",
       "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
       "quantity": 2,
-      "price": 299.50
+      "price": 5000
     },
     {
       "id": 2,
-      "name": "Outro Iphone",
-      "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
+      "name": "Samsumg",
+      "picture": "https://m.media-amazon.com/images/I/610jrgQpLLL._AC_SL1000_.jpg",
       "quantity": 2,
-      "price": 1599.50
+      "price": 3500
     },
     {
       "id": 3,
-      "name": "Product 1",
-      "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
+      "name": "Xiaomi",
+      "picture": "https://t.tudocdn.net/604954?w=1920&h=1080&fit=clip",
       "quantity": 2,
-      "price": 299.50
+      "price": 3000
     },
     {
       "id": 4,
-      "name": "Product 1",
-      "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
+      "name": "Bota",
+      "picture": "https://static.netshoes.com.br/produtos/bota-coturno-br2-lady-ziper-lateral-confortavel-feminina/38/ICR-0018-138/ICR-0018-138_zoom1.jpg?ts=1591836793",
       "quantity": 2,
-      "price": 299.50
+      "price": 99
     },
     {
       "id": 5,
-      "name": "Product 1",
+      "name": "Product 5",
       "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
       "quantity": 2,
       "price": 299.50
     },
     {
       "id": 6,
-      "name": "Product 1",
+      "name": "Product 6",
       "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
       "quantity": 2,
       "price": 299.50
     },
     {
       "id": 7,
-      "name": "Product 1",
+      "name": "Product 7",
       "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
       "quantity": 2,
       "price": 299.50
     },
     {
       "id": 8,
-      "name": "Product 1",
+      "name": "Product 8",
       "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
       "quantity": 2,
       "price": 299.50
