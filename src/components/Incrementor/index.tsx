@@ -44,8 +44,7 @@ const Incrementor = ({
     <IconWrapper>
       <PlusIcon 
         aria-label="Add item" 
-        onClick={()=> handleSetQuantity("sum") }
-        />
+        onClick={()=> handleSetQuantity("sum") }/>
     </IconWrapper>
   </Wrapper>
   )

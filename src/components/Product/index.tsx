@@ -33,9 +33,6 @@ const Product = ({ id, name, price, picture }: ProductProps) => {
     quantity >= 0 && setCart(id, name, picture, quantity, price);
   }
 
-  // como setar o carrrinho pela ordem da entrada? insiro mais uma variável 
-  // chamada data? 
-
   return (
   <Wrapper>
     <img src={picture} alt={`Imagem de referência ${name}`} />
@@ -50,10 +47,7 @@ const Product = ({ id, name, price, picture }: ProductProps) => {
       </Column>
 
       <WrapperIncrementor>
-        <Incrementor 
-          id={id} 
-          setProductInCart={setProductInCart} 
-        />
+        <Incrementor id={id} setProductInCart={setProductInCart} />
       </WrapperIncrementor>
     </Info>
   </Wrapper>
