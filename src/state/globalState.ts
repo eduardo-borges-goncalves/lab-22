@@ -18,20 +18,33 @@ export const useProduct = create <Data> ( set => ({
 
 type Cart = {
   cart: ProductProps[],
-  setCart: (id:number,name:string, picture:string, quantity:number, price:number, drop:boolean, index: number) => void, 
+  setCart: (id:number,name:string, picture:string, quantity:number, price:number) => void, 
 }
 
 export const useCart = create <Cart> ( set =>({
   cart: [],
-  setCart: (id:number,name:string,picture:string,quantity:number,price:number, drop:boolean, index:number) => {
-
-    if (drop && index >= 0) {  
-      set( ({cart}) => (
-        { cart: cart.filter(item => item.id !== id) })      
-      )
-    } 
-    set( ({cart})=>({ cart:[...cart,{id,name,picture,quantity,price}] }) )
+  setCart: (id:number,name:string,picture:string,quantity:number,price:number) => {
+    set( ({cart}) => ({ cart: cart.filter(item => item.id !== id) }) )
+    set( ({cart}) => ({ cart:[...cart,{id,name,picture,quantity,price}] }) )
   }
+}))
+
+type QuantityElement = {
+  id: number, 
+  quantityPerProduct: number
+}
+
+type Quantity = {
+  quantity: QuantityElement[], 
+  setQuantity: (id:number, quantity: number) => void,
+}
+
+export const useQuantity = create <Quantity> ( set => ({
+  quantity: [], 
+  setQuantity: (id:number, quantityPerProduct: number) => {
+    set( ({quantity}) => ({ quantity: quantity.filter(item => item.id !== id)}))
+    set( ({quantity})=>({ quantity: [...quantity, {id, quantityPerProduct}] }))
+  } 
 }))
 
 
