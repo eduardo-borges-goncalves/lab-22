@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCart, useProduct } from "../../state/globalState";
+import { useCart, useProduct, useQuantity } from "../../state/globalState";
 import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";
 
@@ -11,36 +11,26 @@ export type ProductProps = {
   quantity: number;
 }
 
-const Product = ({ id, name, price, picture, quantity }: ProductProps) => {
-  const [ quantityBuy, setQuantityBuy ] = useState(1)
-  
-  const {cart, setCart } = useCart()
-  
-  let priceTotal = price * quantityBuy;
-  let formattedPrice = priceTotal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+const Product = ({ id, name, price, picture }: ProductProps) => {
+  const [ totalFormatted, setTotalFormatted ] = useState("")
+ 
+  const { setCart } = useCart()
+  const { quantity } = useQuantity()
 
-  function setCartGlobal (quantity:number, type: string) {
-    let indexIsOnCart = -1
-    cart.map( (car) => {
-      if (car.name === name ) {
-        indexIsOnCart = cart.indexOf(car)
-      }
-    })
-    
+  useEffect(() => {
+    let quantityToPrice = quantity.filter(item=> item.id === id)
+    if (quantityToPrice.length > 0) {
+      let priceTotal = price * quantityToPrice[0].quantityPerProduct
+      setTotalFormatted(priceTotal.toLocaleString('pt-br', {style:"currency", currency:"BRL"}))
+    }
+  }, [quantity])
+
+  let formattedPrice = price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+  function setProductInCart (quantity:number) {
     quantity >= 0 &&
-     setCart(id, name, picture, quantity, price, true, indexIsOnCart);
+     setCart(id, name, picture, quantity, price);
   }
-
-  function changeQuantityBuy (typeAction:string, quantity: number) {
-    if (typeAction === "sub" && quantityBuy > 0 ){
-      setQuantityBuy(quantityBuy - 1) 
-    }
-    if (typeAction === "sum"){
-      setQuantityBuy(quantityBuy + 1)
-    }
-    setCartGlobal(quantity, typeAction)
-  }
-
 
   return (
   <Wrapper>
@@ -51,13 +41,15 @@ const Product = ({ id, name, price, picture, quantity }: ProductProps) => {
         <Text>{ name }</Text>
         <Text>{ formattedPrice }</Text>
       </Column>
+      <Column>
+        <Text>{ totalFormatted }</Text>
+      </Column>
 
       <WrapperIncrementor>
         <Incrementor 
           id={id} 
-          quantity={quantityBuy}
-          changeQuantityBuy={changeQuantityBuy}
-        />
+          setProductInCart={setProductInCart}
+          />
       </WrapperIncrementor>
     </Info>
   </Wrapper>
