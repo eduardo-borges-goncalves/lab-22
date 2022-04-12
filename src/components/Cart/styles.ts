@@ -15,6 +15,7 @@ export const Wrapper = styled.nav<Pick<MenuPaymentProps, "isOpen">>`
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.25);
   z-index: 1;
+  overflow-y: auto;
 
   h4 {
     margin-bottom: 3.2rem;

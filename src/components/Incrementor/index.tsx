@@ -1,34 +1,32 @@
 import { Plus as PlusIcon } from "@styled-icons/boxicons-regular/Plus";
 import { Subtract as SubtractIcon } from "@styled-icons/remix-fill/Subtract";
 import { useEffect, useState } from "react";
-import { useQuantity } from "../../state/globalState";
+import { useCart } from "../../state/globalState";
 
 import { Wrapper, IconWrapper, Quantity } from "./styles";
 
 type IncrementorProps = {
   id: number;
-  setProductInCart: (quantity: number) => void;
+  setProductInCart: (amount: number) => void;
 };
 
-const Incrementor = ({
-  id, 
-  setProductInCart, 
-}: IncrementorProps) => {
+const Incrementor = ({ id, setProductInCart }: IncrementorProps) => {
+
   const [incrementorQuantity, setIncrementorQuantity] = useState(0)
 
-  const {quantity, setQuantity} = useQuantity()
+  const { cart } = useCart()
 
   useEffect(() => {
-    let quantityToIncrementor = quantity.filter(item=> item.id === id)
-    if (quantityToIncrementor.length > 0) {
-      setIncrementorQuantity(quantityToIncrementor[0].quantityPerProduct)
-      setProductInCart( quantityToIncrementor[0].quantityPerProduct )
-    }
-  }, [quantity])
+    let quantityAtCart = cart.filter(item=> item.id === id)
+    console.log(cart)
+    quantityAtCart.length > 0 ?
+      setIncrementorQuantity(quantityAtCart[0].quantity)
+    : setIncrementorQuantity(0);
+  }, [cart])
 
-  function handleSetQuantity(type: string) {
-    type === "sub" && incrementorQuantity > 0 && setQuantity(id, incrementorQuantity - 1); 
-    type === "sum" && setQuantity(id, incrementorQuantity + 1);
+  function handleSetCart(type: string) {
+    type === "sub" && incrementorQuantity > 0 && setProductInCart(incrementorQuantity - 1); 
+    type === "sum" && setProductInCart(incrementorQuantity + 1);
   }
 
   return (
@@ -36,7 +34,7 @@ const Incrementor = ({
     <IconWrapper>
       <SubtractIcon 
         aria-label="Subtract item" 
-        onClick={()=> handleSetQuantity("sub")}/>
+        onClick={()=> handleSetCart("sub")}/>
     </IconWrapper>
 
     <Quantity>{incrementorQuantity}</Quantity>
@@ -44,7 +42,7 @@ const Incrementor = ({
     <IconWrapper>
       <PlusIcon 
         aria-label="Add item" 
-        onClick={()=> handleSetQuantity("sum") }/>
+        onClick={()=> handleSetCart("sum") }/>
     </IconWrapper>
   </Wrapper>
   )

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCart, useQuantity } from "../../state/globalState";
+import { useCart } from "../../state/globalState";
 import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";
 
@@ -11,26 +11,29 @@ export type ProductProps = {
   quantity: number;
 }
 
-const Product = ({ id, name, price, picture }: ProductProps) => {
+const Product = ({ id, name, price, quantity, picture }: ProductProps) => {
+
   const [ totalFormatted, setTotalFormatted ] = useState("")
  
-  const { setCart } = useCart()
-  const { quantity } = useQuantity()
+  const { cart, setCart } = useCart()
 
   useEffect(() => {
-    let quantityToPrice = quantity.filter(item=> item.id === id)
+    let quantityToPrice = cart.filter(item=> item.id === id)
     if (quantityToPrice.length > 0) {
-      let priceTotal = price * quantityToPrice[0].quantityPerProduct
+      let priceTotal = price * quantityToPrice[0].quantity
       setTotalFormatted(priceTotal.toLocaleString('pt-br',
         {style:"currency", currency:"BRL"}))
-    }
-  }, [quantity])
+    } else setTotalFormatted('')
+  }, [cart])
 
   let formattedPrice = price.toLocaleString('pt-br',{style: 'currency',
   currency: 'BRL'});
 
-  function setProductInCart (quantity:number) {
-    quantity >= 0 && setCart(id, name, picture, quantity, price);
+  function setProductInCart (amount:number) {
+    let product = {id, name, quantity: amount, picture, price}
+    quantity >= amount ? setCart(product)
+    : window.alert(`Ixxe, só temos ${quantity} unidades desse produto 
+      no nosso estoque`)
   }
 
   return (

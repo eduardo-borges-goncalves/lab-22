@@ -11,21 +11,21 @@
       "id": 2,
       "name": "Samsumg",
       "picture": "https://m.media-amazon.com/images/I/610jrgQpLLL._AC_SL1000_.jpg",
-      "quantity": 2,
+      "quantity": 10,
       "price": 3500
     },
     {
       "id": 3,
       "name": "Xiaomi",
       "picture": "https://t.tudocdn.net/604954?w=1920&h=1080&fit=clip",
-      "quantity": 2,
+      "quantity": 20,
       "price": 3000
     },
     {
       "id": 4,
       "name": "Bota",
       "picture": "https://static.netshoes.com.br/produtos/bota-coturno-br2-lady-ziper-lateral-confortavel-feminina/38/ICR-0018-138/ICR-0018-138_zoom1.jpg?ts=1591836793",
-      "quantity": 2,
+      "quantity": 30,
       "price": 99
     },
     {

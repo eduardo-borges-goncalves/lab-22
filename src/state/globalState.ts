@@ -17,36 +17,31 @@ export const useProduct = create <Data> ( set => ({
 
 type Cart = {
   cart: ProductProps[],
-  setCart: (id:number,name:string, picture:string, quantity:number, price:number) => void, 
+  setCart: (product:ProductProps) => void, 
 }
 
-export const useCart = create <Cart> ( set =>({
+export const useCart = create <Cart > ( set =>({
   cart: [],
-  setCart: (id:number, name:string, picture:string, quantity:number, price:number) => {
-    set( ({cart}) => ({ cart: cart.filter(item => item.id !== id) }) )
-    quantity > 0 &&
-     set( ({cart}) => ({ cart:[...cart,{ id, name, picture, quantity, price }] }) )
+  setCart: (product:ProductProps) => {
+    // set( ({cart}) => ({ cart: cart.filter(item => item.id !== id) }) )
+    // quantity > 0 &&
+    // set( ({cart}) => ({ cart:[...cart,{ id, name, picture, quantity, price }] }) )
+
+    set( ({cart}) => {
+      if (cart.length > 0) {
+
+        let isOnCart = cart.filter( item => item.id === product.id )
+        let index = cart.indexOf(isOnCart[0])
+
+        if (isOnCart.length === 0 && product.quantity > 0) // insere 
+          cart.push(product)
+        if (isOnCart.length > 0 && product.quantity > 0) 
+          cart.splice(index, 1, product) // atualiza
+        if (product.quantity === 0) cart.splice(index, 1); // deleta
+
+      } else return { cart:[ product ] } // insere
+
+      return { cart: [...cart] } 
+    }) 
   }
 }))
-
-type QuantityElement = {
-  id: number, 
-  quantityPerProduct: number
-}
-
-type Quantity = {
-  quantity: QuantityElement[], 
-  setQuantity: (id:number, quantity: number) => void,
-}
-
-export const useQuantity = create <Quantity> ( set => ({
-  quantity: [], 
-  setQuantity: (id:number, quantityPerProduct: number) => {
-    set( ({quantity}) => ({ quantity: quantity.filter(item => item.id !== id)}))
-    set( ({quantity})=>({ quantity: [...quantity, {id, quantityPerProduct}] }))
-  } 
-}))
-
-
-
-

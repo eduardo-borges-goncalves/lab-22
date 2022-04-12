@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => { setLoading(false) }, [products])
   return (
     loading ?
-    <div> </div> 
+    <div/> 
     :
     <>
     <Header setIsOpen={setIsOpen} />

@@ -14,6 +14,7 @@ export type MenuPaymentProps = {
 };
 
 const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
+  
   const [totalPrice, setTotalPrice] = useState(0)
   
   const { cart } = useCart()
@@ -36,7 +37,7 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
       </Header>
       { cart.length > 0 ?      
         <>
-        { cart.map(product => <Product {...product} key={product.id} />) }
+        { cart.map(product => <Product {...product} key={product.id} />)}
         <Subtotal>
           <Typography level={5} size="large" fontWeight={600}>
             Total
